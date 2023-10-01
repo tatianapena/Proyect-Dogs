@@ -18,11 +18,17 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
+const PORT = 3001;
 const { conn } = require('./src/db.js');
+const {getTemperaments} = require("../api/src/controllers/temperamentsControllers.js")
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(PORT, async() => {
+    await getTemperaments()
+    console.log(`Server raised in port: ${PORT}`);
   });
 });
+
+
+
