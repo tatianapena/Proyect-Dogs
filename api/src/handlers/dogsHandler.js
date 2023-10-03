@@ -20,6 +20,7 @@ const getDogsHandler = async (req, res) =>{
 
 const getDetailDogHandler = async (req, res) =>{
   const { id } = req.params;
+  
   const source = isNaN(id) ? "bdd" : "api" // si es Nan es decir que el id es un string por tanto buscara en la base de datos, si el ID es un numero buscara en la API.
 
   try {

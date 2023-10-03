@@ -44,7 +44,7 @@ let infoApi = (await axios.get(`${URL}?api_key=${API_KEY}`)).data; // => Info de
 
 //Función que me trae todos los perros de la API y de la Base de Datos filtrado por nombre
 const getDogsByName = async (name) => {
-  const allDogs = await getDogs(); // me trafigo toda la data de la API, Aqui esta el array que creeamos antes con el metodo map con la info de la API
+  const allDogs = await getDogs(); 
 
   const dogFilteredApi = allDogs.filter((dog) => dog.name.toLowerCase() === name.toLowerCase()); // Busquedad por nombre dentro de la API
 
@@ -54,12 +54,12 @@ const getDogsByName = async (name) => {
     through: {
       attributes: []
     },
-  },}); // Busquedad por nombre dentro de la Base de Datos
+  },}); 
 
   return [...dogFilteredApi, ...dogFilteredDataBase];
 }  
 
-// Función que me trae toda la infor correspondiente según el ID que le estoy enviando ya sea para consultar en la Base de Datos o en la API.
+// Función para obtener el perro por ID de la API
 const getDogsById_Api = async(id) => {
   
   const allDogs = await getDogs();
@@ -73,6 +73,7 @@ const getDogsById_Api = async(id) => {
   return dogsById; 
 };
 
+//Función para obtener el perro por ID de la base de datos
 const getDogsById_Db = async (id) =>{
 
    const dogsDataBase = await Dog.findByPk(id, {
@@ -85,7 +86,7 @@ const getDogsById_Db = async (id) =>{
     },
    });
 
-   if(!dogsDataBase) { // si no se encontró ni un perro en la base de datos
+   if(!dogsDataBase) { // si no se encontró ningun perro en la base de datos
     throw Error('The dog does not exist on the data base')
    };
 
@@ -93,12 +94,11 @@ const getDogsById_Db = async (id) =>{
 };
 
 
-
 //Función para crear perros con el metodo POST
 const postDog = async(name, image, life_span, height, weight, temperament) => {
 
   const newDog = await Dog.create({name, image, life_span, height, weight});
-  await newDog.addTemperament(temperament);
+  await newDog.addTemperament(temperament); // Esta línea agrega un temperamento al perro recién creado de la tabla Temperament
 
   return newDog;
 
