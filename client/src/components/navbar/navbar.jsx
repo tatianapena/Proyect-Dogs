@@ -1,9 +1,20 @@
-import React from 'react'
+import { Link } from 'react-router-dom';
+import style from './NavBar.module.css';
 
-function Navbar() {
+const NavBar = () => {
   return (
-    <div>navbar</div>
+    <div className={style.nav}>
+      <Link to= '/home'>Home</Link>
+      <Link to= '/create'>Create Dog</Link>
+      <div className={style.searchBox}>
+        <form>
+          <input  placeholder='Search' />
+          <button className={style.searchButton}>SEARCH</button>
+        </form>
+      </div>
+      
+    </div>
   )
 }
 
-export default Navbar
+export default NavBar;

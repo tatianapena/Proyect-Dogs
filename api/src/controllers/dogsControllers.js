@@ -23,8 +23,9 @@ let infoApi = (await axios.get(`${URL}?api_key=${API_KEY}`)).data; // => Info de
     created: false, //Me sirve para validar lo que viene de la base de datos con lo que viene de la API, y en nuestro modelo de la BD lo seteamos en true, 
     // para que cada de yo cree un usuario se va a crear una columna que tiene un valor en true. Y en la API va estar en False.
       // por si mas adelante hago un filtro sobre los usuarios creados, si dices created true: vienen de la BD y created: false de la API
-    Temperaments: dog.temperament?.split(", "),
+    temperament: dog.temperament, // temperament(es el nombre de la propiedad de la API)
     }));
+    // ?.split(", ") si agrego esto a dog.temperament me lo convierte en un array.
   
   const dogsDataBase = await Dog.findAll({ // => Todos los dogs de la Base de Datos
     include: {
@@ -61,7 +62,7 @@ const getDogsByName = async (name) => {
 
 // Función para obtener el perro por ID de la API
 const getDogsById_Api = async(id) => {
-  
+ 
   const allDogs = await getDogs();
 
   const dogsById = allDogs.filter((dog) => {

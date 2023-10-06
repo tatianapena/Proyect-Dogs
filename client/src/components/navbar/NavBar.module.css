@@ -1,0 +1,21 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+
+}
+
+.searchBox {
+  border: none;
+  outline: none;
+  padding: 10px;
+}
+
+.searchButton {
+  margin-left: 6px;
+}

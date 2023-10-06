@@ -1,21 +1,26 @@
-import {Route, Switch} from 'react-router-dom';
+import { Home, Landing, Detail, Form} from './views';
+import { Route, useLocation } from 'react-router-dom';
+import NavBar from './components/NavBar/NavBar';
 
-import Home from './views/home/home';
-import Landing from './views/landing/landing';
-import Form from './views/form/form';
-import Detail from './views/detail/detail';
 
-import './App.css';
+// import './App.css';
 
 function App() {
+  const location = useLocation();
+
   return (
-    <Switch >
-      <Route exact path='/home' component={Home} />
-      <Route path='/landing' component={Landing} />
-      <Route path='/form' component={Form} />
-      <Route path='/home/:id' component={Detail} />
-    </Switch>  
+    <div className='App'>
+      {location.pathname !== '/' && <NavBar />} 
+
+      <Route exact path='/' render={()=> <Landing />} /> 
+      <Route path='/home' render={()=> <Home />} />
+      <Route path='/detail/:id' render={()=> <Detail />} />
+      <Route path='/create' render={()=> <Form />} />
+    
+    </div>
   );
 }
 
 export default App;
+//utilizo render porq me permite pasar props a las rutas eje <Home unaProp="valor" />
+// location.pathname diferente de ("/") va a mostrar el NavBar 

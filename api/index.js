@@ -23,7 +23,7 @@ const { conn } = require('./src/db.js');
 const {getTemperaments} = require("../api/src/controllers/temperamentsControllers.js")
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ alter: true }).then(() => {
   server.listen(PORT, async() => {
     await getTemperaments()
     console.log(`Server raised in port: ${PORT}`);
