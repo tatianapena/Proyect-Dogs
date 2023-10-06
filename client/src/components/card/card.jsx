@@ -10,7 +10,7 @@ const Card = (props) => {
       <h2 className={style.name}> {name}</h2>
       <p className={style.temp}>Temperaments: {temperament}</p>
       <p className={style.weight}>Weight: {weight}</p>
-      <Link className={style.link}  to={`/detail/:${id}`}>
+      <Link className={style.link} to={`/detail/:${id}`}>
         <button className={style.button}>READ MORE</button>
       </Link> 
     </div>

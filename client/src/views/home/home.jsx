@@ -61,8 +61,7 @@ const Home = () => {
         page={page}
       />  
      </div>
-    
-      <CardsContainer />
+      <CardsContainer currentDogs={currentDogs} />
 
     </div>
   )

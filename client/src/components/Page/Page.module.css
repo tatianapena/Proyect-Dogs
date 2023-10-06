@@ -1,0 +1,16 @@
+
+
+.page {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(2, 62, 2);
+  width: 80%;
+
+
+}
+
+.listNumber {
+ 
+  background-size: 10px;
+  list-style: none;
+}

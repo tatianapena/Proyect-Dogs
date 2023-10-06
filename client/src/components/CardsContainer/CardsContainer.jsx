@@ -2,6 +2,7 @@ import Card from '../Card/Card';
 import { useSelector } from "react-redux";
 import style from './CardsContainer.module.css';
 
+
 const CardsContainer = () => {
 
   const allDogs = useSelector((state) => state.allDogs)
