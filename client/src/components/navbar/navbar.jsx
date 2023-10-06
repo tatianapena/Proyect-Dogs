@@ -4,8 +4,8 @@ import style from './NavBar.module.css';
 const NavBar = () => {
   return (
     <div className={style.nav}>
-      <Link to= '/home'>Home</Link>
-      <Link to= '/create'>Create Dog</Link>
+      <Link className={style.home} to= '/home'>Home</Link>
+      <Link className={style.create} to= '/create'>Create Dog</Link>
       <div className={style.searchBox}>
         <form>
           <input  placeholder='Search' />

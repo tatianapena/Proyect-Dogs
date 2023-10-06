@@ -24,8 +24,8 @@ const Detail = () => {
   } else {
       return (
         <div>
-          <h1>DETAIL</h1>
-          
+          <h1>{dogsDetail.name}</h1>
+          <img src={dogsDetail.image} alt={dogsDetail.name} />
         </div>
       )
     }

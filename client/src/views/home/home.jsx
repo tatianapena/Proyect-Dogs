@@ -16,6 +16,7 @@ const Home = () => {
   const indexOfLastDog = currentPage * dogsPerPage // la respuesta de esta operación en un principio va ser 8.
   const indexOfFirstDog = indexOfLastDog - dogsPerPage // va dar 0
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog)
+ 
 
   const page = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -51,8 +52,9 @@ const Home = () => {
       </select>
 
       <select>
-        <option value='create:false'>Created By Api</option>    
-        <option value='create:true'>Created By Form</option>    
+      <option value='create:false'>Created By: </option> 
+        <option value='create:false'>Api</option>    
+        <option value='create:true'>Form</option>    
       </select>
 
       <Page

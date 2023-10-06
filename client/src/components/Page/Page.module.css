@@ -1,16 +1,27 @@
 
-
 .page {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(2, 62, 2);
-  width: 80%;
-
+ list-style: none;
+ text-align: center;
 
 }
 
 .listNumber {
- 
-  background-size: 10px;
-  list-style: none;
+  margin: 20px 0;
+  display: inline-block;
+  margin-right: 10px;
+  
+}
+
+
+.anchor{
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  background: #216a38;
+  text-decoration: none;
+}
+
+.anchor:hover {
+  background: #1d301c;
+
 }

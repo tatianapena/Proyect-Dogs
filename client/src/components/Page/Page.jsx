@@ -13,9 +13,9 @@ const Page = ({dogsPerPage, allDogs, page}) => {
         {pageNumbers &&
           pageNumbers.map(number => (
             <li className={style.listNumber} key={number}>
-              <a onClick={() => page(number)}>{number}</a>
+              <a className={style.anchor} onClick={() => page(number)}>{number}</a>
             </li>    
-          ))};
+          ))}
       </ul>
     </nav>
   )
