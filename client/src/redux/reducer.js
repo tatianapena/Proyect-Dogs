@@ -8,6 +8,7 @@ const initialState = {
 
 
 const rootReducer = (state=initialState, action) => {
+  let sorted;
   switch(action.type) {
     case GET_DOGS: 
       return {
@@ -29,13 +30,17 @@ const rootReducer = (state=initialState, action) => {
       };
     
     case ORDER:
-      const allDogsCopi = [...state.dogs]
+    
+      if(action.payload === "A"){
+        sorted = state.allDogs.sort((a,b) => (a.name > b.name ? 1 : -1))
+    }
+    if(action.payload === "D"){
+        sorted = state.allDogs.sort((a,b) => (b.name > a.name ? 1 : -1))
+    }
       return {
         ...state,
-        dogs:
-          action.payload === 'A'
-          ? allDogsCopi.sort((a,b) => a.id - b.id)
-          : allDogsCopi.sort((a,b) => b.id - a.id)
+        allDogs: [...sorted]
+        
       };
 
     case FILTER_CREATED: 

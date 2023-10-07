@@ -23,10 +23,13 @@ let infoApi = (await axios.get(`${URL}?api_key=${API_KEY}`)).data; // => Info de
     created: false, //Me sirve para validar lo que viene de la base de datos con lo que viene de la API, y en nuestro modelo de la BD lo seteamos en true, 
     // para que cada de yo cree un usuario se va a crear una columna que tiene un valor en true. Y en la API va estar en False.
       // por si mas adelante hago un filtro sobre los usuarios creados, si dices created true: vienen de la BD y created: false de la API
-    temperament: dog.temperament, // temperament(es el nombre de la propiedad de la API)
+      Temperaments: dog.temperament?.split(', ').map((temp) => ({
+        "name": temp
+    })),
+      
     }));
-    // ?.split(", ") si agrego esto a dog.temperament me lo convierte en un array.
   
+   
   const dogsDataBase = await Dog.findAll({ // => Todos los dogs de la Base de Datos
     include: {
       model: Temperament,
@@ -71,7 +74,8 @@ const getDogsById_Api = async(id) => {
 
   if(!dogsById) throw Error('The dog does not exist');
 
-  return dogsById; 
+  return dogsById.pop(); 
+
 };
 
 //Función para obtener el perro por ID de la base de datos
@@ -96,10 +100,10 @@ const getDogsById_Db = async (id) =>{
 
 
 //Función para crear perros con el metodo POST
-const postDog = async(name, image, life_span, height, weight, temperament) => {
+const postDog = async(name, image, life_span, height, weight, Temperaments) => {
 
   const newDog = await Dog.create({name, image, life_span, height, weight});
-  await newDog.addTemperament(temperament); // Esta línea agrega un temperamento al perro recién creado de la tabla Temperament
+  await newDog.addTemperament(Temperaments); // Esta línea agrega un temperamento al perro recién creado de la tabla Temperament
 
   return newDog;
 

@@ -13,7 +13,7 @@ const CardsContainer = ({currentDogs}) => {
         id={dog.id}
         image={dog.image}
         name={dog.name}
-        temperament={dog.temperament}
+        Temperaments={dog.Temperaments}
         weight={dog.weight}
         />
       })

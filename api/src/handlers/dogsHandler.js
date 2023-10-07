@@ -41,13 +41,13 @@ const getDetailDogHandler = async (req, res) =>{
 
 
 const createDogHandler = async (req, res) =>{
-  const {name, image, life_span, height, weight, temperament} = req.body;
+  const {name, image, life_span, height, weight, Temperaments} = req.body;
 
   try {
     if(!name || !image || !life_span || !height || !weight){
       res.status(400).json('Not all fields were received')
     } else {
-      const createDog = await postDog(name, image, life_span, height, weight, temperament)
+      const createDog = await postDog(name, image, life_span, height, weight, Temperaments)
       res.status(200).json(createDog)
     }
     
