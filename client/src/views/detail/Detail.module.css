@@ -1,0 +1,34 @@
+.card {
+  background: white;
+  width: 270px;
+  margin: 10px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card:hover {
+  background-color:rgb(23,35,26);
+  color: white;
+  cursor: pointer;
+  transform: scale(1.03);
+  transition: all 1s ease;
+}
+
+.image {
+  height: 190px;
+  width: 100%;
+  margin-bottom: 15px;
+  border-radius: 15px 15px 0 0 ;
+}
+
+.name {
+  text-align: center;
+}
+
+.temp {
+  padding: 10px;
+  text-align: center;
+}
