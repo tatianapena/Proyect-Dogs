@@ -4,8 +4,8 @@ import style from './Page.module.css';
 const Page = ({dogsPerPage, allDogs, page}) => {
   const pageNumbers = []
   //Math.ceil: redondea para arriba
-  for(let i=0; i<=Math.ceil(allDogs/dogsPerPage); i++){
-    pageNumbers.push(i+1)
+  for(let i=1; i<=Math.ceil(allDogs/dogsPerPage); i++){
+    pageNumbers.push(i)
   }
   return (
     <nav>

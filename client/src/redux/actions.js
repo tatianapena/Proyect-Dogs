@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID } from './action-types';
+import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID, ORDER, FILTER_CREATED } from './action-types';
 import axios from 'axios';
 
 export const getDogs = () => {
@@ -33,7 +33,7 @@ export const getDogsById = (id) => {
   const endpoint = `http://localhost:3001/dogs/${id}`;
   return async (dispatch) =>{
     try {
-      const { data } = await axios.get(endpoint)
+      const {data} = await axios.get(endpoint)
     
       dispatch({type: GET_DOGS_BY_ID, payload: data })
     } catch (error) {
@@ -43,3 +43,16 @@ export const getDogsById = (id) => {
 };
 
 
+export const orderCards = (order) => {
+  return {
+    type: ORDER,
+    payload: order
+  }
+}
+
+export const filterCreated = (payload) => {
+  return {
+    type: FILTER_CREATED,
+    payload
+  }
+}

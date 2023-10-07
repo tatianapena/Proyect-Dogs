@@ -1,7 +1,7 @@
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getDogs} from '../../redux/actions';
+import {getDogs, orderCards, filterCreated} from '../../redux/actions';
 import Page from '../../components/Page/Page';
 
 import style from './Home.module.css'
@@ -9,7 +9,8 @@ import style from './Home.module.css'
 const Home = () => {
 
   const dispatch = useDispatch();
-  const allDogs = useSelector((state) => state.allDogs);
+  const allDogs = useSelector((state) => state.dogs);
+  
 
   const [currentPage, setCurrentPage] = useState(1);//empieza en 1 porq siempre arranco en la primera página
   const [dogsPerPage, setDogsPerPage] = useState(8);//cuantos dogs quiero mostrar por página
@@ -32,29 +33,41 @@ const Home = () => {
     dispatch(getDogs());
   }
 
+  const handleOrder = (event) => {
+    dispatch(orderCards(event.target.value));
+  }
+
+  const hanlderFilterCreated = (event) => {
+    dispatch(filterCreated(event.target.value));
+  }
+ 
 
   return (
     <div className={style.home}> 
      
      <div>
      <button onClick={handlerClick}>Load all Dogs</button>
-      <select>
-        <option value='asc'>Ascendant</option>
-        <option value='desc'>descendant</option>
+
+      <select onChange={handleOrder}>
+        <option value='Select'>Order By Name </option>
+        <option value="A">Ascendente</option>
+        <option value="D">Descendente</option>
       </select>
 
-      <select>
+      <select >
         <option value='All'>Temperaments</option>    
       </select>
 
       <select>
         <option value='All'>Weight</option>    
       </select>
+    
 
-      <select>
-      <option value='create:false'>Created By: </option> 
-        <option value='create:false'>Api</option>    
-        <option value='create:true'>Form</option>    
+      <select onChange={hanlderFilterCreated}>
+        <option value='Select'>Created By:</option>
+        <option value='All'>All</option> 
+        <option value='created'>Created</option>    
+        <option value='api'>Existing</option>    
       </select>
 
       <Page

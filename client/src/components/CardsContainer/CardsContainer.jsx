@@ -1,10 +1,10 @@
 import Card from '../Card/Card';
-import { useSelector } from "react-redux";
 import style from './CardsContainer.module.css';
 
 
 const CardsContainer = ({currentDogs}) => {
- 
+  console.log(currentDogs)
+
 
   return ( // se va hacer un recorrido de la propiedad allDogs que nos traemos del estado global
     <div className={style.cardsContainer}>

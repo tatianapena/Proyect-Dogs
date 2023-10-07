@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Card = (props) => {
   const { id, image, name, temperament, weight } = props;
+
   return (
     <div className={style.card}>
       <img className={style.image} src={image} alt={name} />
