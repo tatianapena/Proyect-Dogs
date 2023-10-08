@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID, ORDER, FILTER_CREATED } from './action-types';
+import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID, ORDER, FILTER_CREATED, CREATE_DOGS } from './action-types';
 import axios from 'axios';
 
 export const getDogs = () => {
@@ -17,7 +17,7 @@ export const getDogs = () => {
 };
 
 export const getDogsByName = (name) => {
-  const endpoint = `http://localhost:3001/dogs?name=${name}`;
+  const endpoint = 'http://localhost:3001/dogs/?name='+name;
   return async (dispatch) => {
     try {
       const { data } = await axios.get(endpoint);
@@ -55,4 +55,17 @@ export const filterCreated = (payload) => {
     type: FILTER_CREATED,
     payload
   }
+}
+
+export const createdDogs = (form) => {
+  const endpoint = 'http://localhost:3001/dogs'
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(endpoint,form)
+      
+      dispatch({type: CREATE_DOGS, payload:[data]}) // le va a despachar una action al reducer para q pueda modificar/cambiar lo que quiero del estado global
+    } catch (error) {
+        console.log(error.message);
+    }
+  };
 }

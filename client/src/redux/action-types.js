@@ -3,3 +3,4 @@ export const GET_DOGS_BY_NAME = 'GET_DOGS_BY_NAME';
 export const GET_DOGS_BY_ID = 'GET_DOGS_BY_ID';
 export const ORDER = 'ORDER';
 export const FILTER_CREATED = 'FILTER_CREATED';
+export const CREATE_DOGS = 'CREATE_DOGS';

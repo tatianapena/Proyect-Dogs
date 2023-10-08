@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import { useDispatch } from 'react-redux';
+import {createdDogs} from '../../redux/actions';
 
 const Form = () => {
 
@@ -39,9 +41,11 @@ const Form = () => {
 
   }
 
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(createdDogs(form))
   }
 
   

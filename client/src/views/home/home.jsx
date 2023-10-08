@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
   
-
+  const [orden, setOrden] = useState('');
   const [currentPage, setCurrentPage] = useState(1);//empieza en 1 porq siempre arranco en la primera página
   const [dogsPerPage, setDogsPerPage] = useState(8);//cuantos dogs quiero mostrar por página
   const indexOfLastDog = currentPage * dogsPerPage // la respuesta de esta operación en un principio va ser 8.
@@ -34,7 +34,10 @@ const Home = () => {
   }
 
   const handleOrder = (event) => {
-    dispatch(orderCards(event.target.value));
+    event.preventDefault();
+    dispatch(orderCards(event.target.value))
+    setCurrentPage(1); //cuando se hace el ordenamiento por favor setearlo en la primera
+    setOrden(`Ordenado ${event.target.value}`) //modifica el estado local y se renderice
   }
 
   const hanlderFilterCreated = (event) => {

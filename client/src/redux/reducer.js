@@ -1,9 +1,9 @@
-import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID, ORDER, FILTER_CREATED } from './action-types';
+import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID, ORDER, FILTER_CREATED, CREATE_DOGS } from './action-types';
 
 const initialState = {
-  allDogs: [],
   dogs: [],
-
+  allDogs: [],
+ 
 }
 
 
@@ -20,7 +20,7 @@ const rootReducer = (state=initialState, action) => {
     case GET_DOGS_BY_NAME:
       return {
         ...state,
-        allDogs: action.payload
+        dogs: action.payload
       };
     
     case GET_DOGS_BY_ID:
@@ -31,15 +31,15 @@ const rootReducer = (state=initialState, action) => {
     
     case ORDER:
     
-      if(action.payload === "A"){
-        sorted = state.allDogs.sort((a,b) => (a.name > b.name ? 1 : -1))
+    if(action.payload === "A"){
+        sorted = state.dogs.sort((a,b) => (a.name > b.name ? 1 : -1))
     }
     if(action.payload === "D"){
-        sorted = state.allDogs.sort((a,b) => (b.name > a.name ? 1 : -1))
+        sorted = state.dogs.sort((a,b) => (b.name > a.name ? 1 : -1))
     }
       return {
         ...state,
-        allDogs: [...sorted]
+        dogs: [...sorted]
         
       };
 
@@ -48,6 +48,12 @@ const rootReducer = (state=initialState, action) => {
       return {
         ...state,
         dogs: action.payload === 'All' ? state.allDogs : createdFilter
+      };
+    
+    case CREATE_DOGS:
+      return {
+        ...state,
+        dogs:[...state.dogs, ...action.payload] //me trae todos lo perros, pero tambien me trae los que acabo de crear.
       };
     
       
