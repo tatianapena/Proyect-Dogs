@@ -46,51 +46,28 @@ const rootReducer = (state=initialState, action) => {
       };
     
     case WEIGHT_FILTER:
-      if(action.payload === "A"){
-        sorted = state.dogs.sort((a,b) => (a.weight > b.weight ? 1 : -1))
-    }
-    if(action.payload === "D"){
-        sorted = state.dogs.sort((a,b) => (b.weight > a.weight ? 1 : -1))
-    }
+      if(action.payload === 'weight'){
+       const weightFilter = state.allDogs.filter(dog => dog.weight?.includes(action.payload))
+       return {
+        ...state,
+        allDogs: weightFilter
+      }
+      } 
+      
+    
+    case TEMPERAMENT_FILTER: 
+    console.log(action.payload, 'me llamo')
+    if (action.payload) {
+      const filterTemp = state.dogs.filter(dog =>
+        dog.Temperaments?.includes(action.payload)
+      );
+      
       return {
         ...state,
-        dogs: [...sorted]
-        
-      };
+        allDogs: filterTemp
+      }
+      }
     
-    // case TEMPERAMENT_FILTER: 
-    // //  const dogs = state.allDogs.map(dog => dog.Temperaments)
-    //  if(action.payload === 'id') {
-    //     return{
-    //       ...state,
-    //       dogs: state.allDogs //restaura la lista de los perros,
-    //     }; 
-    //   } else {
-    //     const filterTemp = allDogs.filter(dog => {
-    //       const dogTemperaments = dog.Temperaments.map(temp => temp.name);
-    //       return dogTemperaments.includes(temperaments);
-    //     });
-    //   }
-    // const filteredDogs = 
-    // return {
-    //   ...state,
-    //   filterTempDogs: filteredDogs
-    // }
-    
-      // return {
-      //   ...state,
-      //   filterTempDogs: dogs
-      // }
-      // if(action.payload === 'id') {
-      //   return{
-      //     ...state,
-      //     dogs: state.allDogs //restaura la lista de los perros,
-      //   };   
-      // } else {
-      //   const filterTemp = state.allDogs.filter(dog => {
-      //     const tempName = temperament
-      //   })
-      // }
 
     case FILTER_CREATED: 
       const createdFilter = action.payload ==='created'? state.allDogs.filter(dog => dog.created) : state.allDogs.filter(dog => !dog.created)
