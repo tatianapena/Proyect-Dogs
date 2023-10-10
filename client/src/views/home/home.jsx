@@ -11,6 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
   const temperaments = useSelector((state) => state.temperaments)
+ 
   
   
   
@@ -73,21 +74,21 @@ const Home = () => {
 
 
       <select onChange={handlerSelect} name='temperament'>
+        <option value='Select'>Filter by Temperaments: </option>
         {temperaments.map((temp)=> (
           <option value={temp.name}>{temp.name}</option>
         ))}
       </select>
 
       <select onChange={handlerWeight}>
-        <option value='All'>Weight</option>  
-          {allDogs.map((elem)=> (
-        <option value={elem.weight}>{elem.weight}</option>
-        ))} 
+        <option value='Select'>Order By Weight: </option>
+        <option value="maxWeight">Max Weight</option>
+        <option value="minWeight">Min Weight</option>
       </select>
     
 
       <select onChange={handlerFilterCreated}>
-        <option value='Select'>Created By:</option>
+        <option value='Select'>Created By: </option>
         <option value='All'>All</option> 
         <option value='created'>Created</option>    
         <option value='api'>Existing</option>    

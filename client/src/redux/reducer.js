@@ -46,27 +46,34 @@ const rootReducer = (state=initialState, action) => {
       };
     
     case WEIGHT_FILTER:
-      if(action.payload === 'weight'){
-       const weightFilter = state.allDogs.filter(dog => dog.weight?.includes(action.payload))
+      if(action.payload === "maxWeight"){
+        sorted = state.dogs.sort((a,b) => (b.weight > a.weight ? 1 : -1)) // sacar el peso max
+      }
+      if(action.payload === "minWeight"){
+        sorted = state.dogs.sort((a,b) => (a.weight > b.weight ? 1 : -1)) // sacar el peso min 
+      }
        return {
         ...state,
-        allDogs: weightFilter
+        dogs: [...sorted]
       }
-      } 
-      
+   
     
     case TEMPERAMENT_FILTER: 
-    console.log(action.payload, 'me llamo')
+    
     if (action.payload) {
-      const filterTemp = state.dogs.filter(dog =>
-        dog.Temperaments?.includes(action.payload)
-      );
+      const filterTemp = state.dogs.filter(dog => {
+      for(let i in dog.Temperaments) {
+        if(dog.Temperaments[i].name === action.payload ) {
+          return dog
+        }
+      }
+    });
       
       return {
         ...state,
-        allDogs: filterTemp
+        dogs: filterTemp
       }
-      }
+    }
     
 
     case FILTER_CREATED: 
