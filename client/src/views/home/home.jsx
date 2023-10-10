@@ -13,9 +13,6 @@ const Home = () => {
   const temperaments = useSelector((state) => state.temperaments)
  
   
-  
-  
-  
   const [orden, setOrden] = useState('');
   const [currentPage, setCurrentPage] = useState(1);//empieza en 1 porq siempre arranco en la primera página
   const [dogsPerPage, setDogsPerPage] = useState(8);//cuantos dogs quiero mostrar por página
@@ -82,8 +79,8 @@ const Home = () => {
 
       <select onChange={handlerWeight}>
         <option value='Select'>Order By Weight: </option>
-        <option value="maxWeight">Max Weight</option>
-        <option value="minWeight">Min Weight</option>
+        <option value="maxWeight">Max-Weight</option>
+        <option value="minWeight">Min-Weight</option>
       </select>
     
 

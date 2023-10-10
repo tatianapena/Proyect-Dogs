@@ -13,10 +13,16 @@ const rootReducer = (state=initialState, action) => {
   let sorted;
   switch(action.type) {
     case GET_DOGS: 
+      const filterbyWeight = [...action.payload].map(elem => {
+        if(elem.weight.includes('NaN') || !elem.weight || elem.weight.length <= 2 ){
+          elem.weight = '5 - 10'
+        }
+        return elem
+      })
       return {
         ...state, 
-        dogs: action.payload,
-        allDogs: action.payload // esto es para que siempre me guarde una copia, por ejemplo en lo casos donde quiero filtrar sobre lo ya filtrado 
+        dogs: filterbyWeight,
+        allDogs: filterbyWeight // esto es para que siempre me guarde una copia, por ejemplo en lo casos donde quiero filtrar sobre lo ya filtrado 
       };
     
     case GET_DOGS_BY_NAME:
@@ -46,11 +52,38 @@ const rootReducer = (state=initialState, action) => {
       };
     
     case WEIGHT_FILTER:
+      let maxWeightA;
+      let minWeightA;
+      let maxWeightB;
+      let minWeightB;
+
       if(action.payload === "maxWeight"){
-        sorted = state.dogs.sort((a,b) => (b.weight > a.weight ? 1 : -1)) // sacar el peso max
+        sorted = state.dogs.sort((a,b) => {
+          maxWeightA = a.weight.split(' - ')
+          maxWeightB = b.weight.split(' - ')
+        if(parseInt(maxWeightA[0]) > parseInt(maxWeightB[0])){
+          return 1
+        }
+        else if (parseInt(maxWeightA[0]) < parseInt(maxWeightB[0])){
+          return -1
+        } else {
+          return 0
+        } }) // sacar el peso max
       }
       if(action.payload === "minWeight"){
-        sorted = state.dogs.sort((a,b) => (a.weight > b.weight ? 1 : -1)) // sacar el peso min 
+        sorted = state.dogs.sort((a,b) => {
+          minWeightB = b.weight.split(' - ')
+          minWeightA = a.weight.split(' - ') 
+          console.log(minWeightA,  ' lo' )
+          if(parseInt(minWeightA[0]) > parseInt(minWeightB[0])){
+            return -1
+          }
+          else if (parseInt(minWeightA[0]) < parseInt(minWeightB[0])){
+            return 1
+          } else {
+            return 0
+          } 
+          })  // sacar el peso min 
       }
        return {
         ...state,
@@ -61,10 +94,10 @@ const rootReducer = (state=initialState, action) => {
     case TEMPERAMENT_FILTER: 
     
     if (action.payload) {
-      const filterTemp = state.dogs.filter(dog => {
-      for(let i in dog.Temperaments) {
-        if(dog.Temperaments[i].name === action.payload ) {
-          return dog
+      const filterTemp = state.dogs.filter(dog => { //el filter busca coincidencias dentro de un array y devuelve un array con todas ellas
+      for(let i in dog.Temperaments) { //aqui el for va iterar sobre todas las propiedades dentro de dog.Temperaments
+        if(dog.Temperaments[i].name === action.payload ) { // aqui compara si el name del temperamento del perro es el que se pasa por action.payload, que seria el value='name'
+          return dog 
         }
       }
     });
