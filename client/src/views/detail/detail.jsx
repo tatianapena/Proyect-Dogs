@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDogsById } from '../../redux/actions';
+import { getDogsById, cleanDetail } from '../../redux/actions';
 import style from '../Detail/Detail.module.css';
 
 const Detail = () => {
@@ -12,9 +12,11 @@ const Detail = () => {
 
 
   useEffect(() => {
-  
     dispatch(getDogsById(id))
+    return () => dispatch(cleanDetail()) // esto es para limpiar el estado global 
   }, [id, dispatch]); 
+
+ 
 
   return (
     <div className={style.container}>

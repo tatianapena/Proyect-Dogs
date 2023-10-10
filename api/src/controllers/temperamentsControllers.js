@@ -11,11 +11,12 @@ const { Temperament } = require('../db');
 //Función que me va a traer la propiedad Temperament con sus valores tanto de la BD como de la API
 const getTemperaments = async() => {
 
-  const checkInfo = await Temperament.findAll();
+  let checkInfo = await Temperament.findAll();
+
+
   if(checkInfo.length === 0) {
 
     const infoApi = (await axios.get(`${URL}?api_key=${API_KEY}`)).data;
-
     let array = [];
 
     infoApi.map((dog) => array.push(dog.temperament))
@@ -37,11 +38,11 @@ const getTemperaments = async() => {
 
     uniqueTemp.forEach((temp) => {
       Temperament.findOrCreate({where: {name: temp}});
-    })
-  }else {
-    return ('The data base is already created')
-  }
-  
+    }) 
+    
+    checkInfo = uniqueTemp
+  } 
+   return checkInfo;
 };
 
 

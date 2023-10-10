@@ -20,7 +20,7 @@ const NavBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(getDogsByName(name));
-    setName('');
+    setName(''); // esto es para q se borre el nombre de lo q escribo en el input una vez lo busque, 
   }
 
 

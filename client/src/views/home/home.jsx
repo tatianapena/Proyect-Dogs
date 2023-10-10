@@ -1,7 +1,7 @@
 import CardsContainer from '../../components/CardsContainer/CardsContainer';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {getDogs, orderCards, filterCreated} from '../../redux/actions';
+import {getDogs, orderCards, filterCreated, weightFiltered, getTemperaments, temperamentFilter} from '../../redux/actions';
 import Page from '../../components/Page/Page';
 
 import style from './Home.module.css'
@@ -10,6 +10,8 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
+  const temperaments = useSelector((state) => state.temperaments)
+  
   
   const [orden, setOrden] = useState('');
   const [currentPage, setCurrentPage] = useState(1);//empieza en 1 porq siempre arranco en la primera página
@@ -25,7 +27,9 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getDogs());
+    dispatch(getTemperaments())
   }, [dispatch]) // mi array de dependencia va vacio porq mi acción no necesita de nadie para su montaje
+
 
 
   const handlerClick = (event) => {
@@ -40,8 +44,16 @@ const Home = () => {
     setOrden(`Ordenado ${event.target.value}`) //modifica el estado local y se renderice
   }
 
-  const hanlderFilterCreated = (event) => {
+  const handlerFilterCreated = (event) => {
     dispatch(filterCreated(event.target.value));
+  }
+
+  const handlerWeight = (event) => {
+    dispatch(weightFiltered(event.target.value));
+  }
+
+  const handlerSelect = (event) => {
+    dispatch(temperamentFilter(event.target.value));
   }
  
 
@@ -57,16 +69,22 @@ const Home = () => {
         <option value="D">Descendente</option>
       </select>
 
-      <select >
-        <option value='All'>Temperaments</option>    
+
+      <select onChange={handlerSelect} name='temperament'>
+        {temperaments.map((temp)=> (
+          <option value={temp.name}>{temp.name}</option>
+        ))}
       </select>
 
-      <select>
-        <option value='All'>Weight</option>    
+      <select onChange={handlerWeight}>
+        <option value='All'>Weight</option>  
+          {allDogs.map((elem)=> (
+        <option value={elem.weight}>{elem.weight}</option>
+        ))} 
       </select>
     
 
-      <select onChange={hanlderFilterCreated}>
+      <select onChange={handlerFilterCreated}>
         <option value='Select'>Created By:</option>
         <option value='All'>All</option> 
         <option value='created'>Created</option>    

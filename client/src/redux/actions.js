@@ -1,5 +1,9 @@
-import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID, ORDER, FILTER_CREATED, CREATE_DOGS } from './action-types';
+
+import { GET_DOGS, GET_DOGS_BY_NAME, GET_DOGS_BY_ID, ORDER, FILTER_CREATED, WEIGHT_FILTER, POST_DOGS, TEMPERAMENT_FILTER, GET_TEMPERAMENTS, CLEAN_DETAIL} from './action-types';
 import axios from 'axios';
+
+
+
 
 export const getDogs = () => {
 
@@ -57,15 +61,55 @@ export const filterCreated = (payload) => {
   }
 }
 
-export const createdDogs = (form) => {
-  const endpoint = 'http://localhost:3001/dogs'
-  return async (dispatch) => {
+export const weightFiltered = (payload) => {
+  return {
+    type: WEIGHT_FILTER,
+    payload
+  }
+}
+
+export const temperamentFilter = (temperament) => {
+  return async function(dispatch){
+
     try {
-      const { data } = await axios.post(endpoint,form)
-      
-      dispatch({type: CREATE_DOGS, payload:[data]}) // le va a despachar una action al reducer para q pueda modificar/cambiar lo que quiero del estado global
+      dispatch({
+        type: TEMPERAMENT_FILTER,
+        payload: temperament
+      })
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
+    }
+  }
+}
+
+
+  export const getTemperaments =  () => {
+    const endpoint = 'http://localhost:3001/temperaments';
+    return async (dispatch) => {
+      try {
+        const {data} = await axios.get(endpoint)
+        console.log(data, 'hola') 
+        dispatch({ type: GET_TEMPERAMENTS, payload: data})
+      } catch (error) {
+          console.log(error.message);
+      }
     }
   };
+
+// export const postDogs = (payload) => {
+//    const endpoint = 'http://localhost:3001/dogs';
+//    return async (dispatch) => {
+   
+//    }
+// };
+
+export const cleanDetail = () => {
+  return { type: CLEAN_DETAIL}
 }
+
+
+// return async function (dispatch){
+//   const response = await axios.post('http://localhost:3001/dogs',payload)
+//   console.log(response)
+//   return response;
+// }; 
