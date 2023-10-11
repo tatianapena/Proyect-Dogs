@@ -28,7 +28,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getDogs());
     dispatch(getTemperaments())
-  }, [dispatch]) // mi array de dependencia va vacio porq mi acción no necesita de nadie para su montaje
+  }, [dispatch]) 
 
 
 
@@ -40,7 +40,7 @@ const Home = () => {
   const handleOrder = (event) => {
     event.preventDefault();
     dispatch(orderCards(event.target.value))
-    setCurrentPage(1); //cuando se hace el ordenamiento por favor setearlo en la primera
+    setCurrentPage(1); //cuando se hace el ordenamiento por favor setearlo en la primera pag
     setOrden(`Ordenado ${event.target.value}`) //modifica el estado local y se renderice
   }
 
@@ -59,9 +59,11 @@ const Home = () => {
 
   return (
     <div className={style.home}> 
-     
-     <div>
-     <button onClick={handlerClick}>Load all Dogs</button>
+    
+    <div className={style.menu_options}>
+
+     <div className={style.filters} >
+        <button onClick={handlerClick}>Load all Dogs</button>
 
       <select onChange={handleOrder}>
         <option value='Select'>Order By Name </option>
@@ -82,7 +84,7 @@ const Home = () => {
         <option value="maxWeight">Max-Weight</option>
         <option value="minWeight">Min-Weight</option>
       </select>
-    
+
 
       <select onChange={handlerFilterCreated}>
         <option value='Select'>Created By: </option>
@@ -90,13 +92,17 @@ const Home = () => {
         <option value='created'>Created</option>    
         <option value='api'>Existing</option>    
       </select>
+     </div>
 
+     <div>    
       <Page
         dogsPerPage={dogsPerPage}
         allDogs={allDogs.length}
         page={page}
       />  
      </div>
+     </div>      
+
       <CardsContainer currentDogs={currentDogs} />
 
     </div>

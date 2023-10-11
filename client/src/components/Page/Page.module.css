@@ -2,7 +2,7 @@
 .page {
  list-style: none;
  text-align: center;
-
+  margin-right: 2rem;
 }
 
 .listNumber {
@@ -15,9 +15,9 @@
 
 .anchor{
   display: block;
-  padding: 10px 20px;
+  padding: 8px 13px;
   color: white;
-  background: #216a38;
+  background: #6D925C;
   text-decoration: none;
 }
 

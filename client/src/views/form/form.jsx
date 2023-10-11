@@ -82,7 +82,6 @@ const Form = () => {
   });
 
 
-
   const newDog = {
     name:form.name,
     image: form.image,
@@ -99,7 +98,7 @@ const Form = () => {
     try {
       const endpoint = 'http://localhost:3001/dogs';
       const response = await axios.post(endpoint, newDog)
-      console.log(response)
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -140,65 +139,77 @@ const Form = () => {
 
   return (
    
-  <div>
-    <h1>¡Create your Favorite Dog!</h1>
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name: </label>
-        <input onChange={handleChange} value = {form.name} type='text' name= "name"></input>
-        {errors.name && <p className={style.errors} >{errors.name}</p>}
-      </div>
+  <div className={style.form}>
 
-      <div>
-        <label htmlFor="maxHeight">MaxHeight: </label>
-        <input onChange={handleChange} value = {form.maxHeight} type='text' name= "maxHeight"></input>
-        {errors.maxHeight && <p className={style.errors} >{errors.maxHeight}</p>}
-      </div>
+    <div className={style.title}>
+      <h1>¡ Create your Favorite Dog !</h1>
+    </div>
+    
+    <div className={style.form_inputs}>
 
-      <div>
-        <label htmlFor="minHeight">MinHeight: </label>
-        <input onChange={handleChange} value = {form.minHeight} type='text' name= "minHeight"></input>
-        {errors.minHeight && <p className={style.errors} >{errors.minHeight}</p>}
-      </div>
+      <form onSubmit={handleSubmit}>
 
-      <div>
-        <label htmlFor="maxWeight">MaxWeight: </label>
-        <input onChange={handleChange} value = {form.maxWeight} type='text' name= "maxWeight"></input>
-        {errors.maxWeight && <p className={style.errors} >{errors.maxWeight}</p>}
-      </div>
+        <div className={style.inputs}>
+          <label className={style.label} htmlFor="name">Name: </label>
+          <input className={style.input} onChange={handleChange} value = {form.name} type='text' name= "name"></input>
+          {errors.name && <p className={style.errors} >{errors.name}</p>}
+        </div>
 
-      <div>
-      <label htmlFor="minWeight">MinWeight: </label>
-        <input onChange={handleChange} value = {form.minWeight} type='text' name= "minWeight"></input>
-        {errors.minWeight && <p className={style.errors} >{errors.minWeight}</p>}
-      </div>
+        <div className={style.inputs}>
+          <label className={style.label} htmlFor="maxHeight">MaxHeight: </label>
+          <input className={style.input} onChange={handleChange} value = {form.maxHeight} type='text' name= "maxHeight"></input>
+          {errors.maxHeight && <p className={style.errors} >{errors.maxHeight}</p>}
+        </div>
 
-      <div>
-        <label htmlFor="lifeSpan">LifeSpan: </label>
-        <input onChange={handleChange} value = {form.lifeSpan} type='text' name= "lifeSpan"></input>
-        {errors.lifeSpan && <p className={style.errors} >{errors.lifeSpan}</p>}
-      </div>
+        <div className={style.inputs}>
+          <label className={style.label} htmlFor="minHeight">MinHeight: </label>
+          <input className={style.input} onChange={handleChange} value = {form.minHeight} type='text' name= "minHeight"></input>
+          {errors.minHeight && <p className={style.errors} >{errors.minHeight}</p>}
+        </div>
 
-      <div>
-        <label htmlFor='temperament'>Temperaments: </label>
-        <select onChange={handlerSelect} name='temperament'>
-          {temperaments.map((temp)=> (
-            <option value={temp.id} name={temp.name}>{temp.name}</option>
-          ))}
-        </select>
-        <ul><li>{form.temperament.map(item => item + ' , ')}</li></ul>
-        {errors.temperament && <p className={style.errors} >{errors.temperament}</p>}
-      </div>
-      
+        <div className={style.inputs}>
+          <label className={style.label} htmlFor="maxWeight">MaxWeight: </label>
+          <input className={style.input} onChange={handleChange} value = {form.maxWeight} type='text' name= "maxWeight"></input>
+          {errors.maxWeight && <p className={style.errors} >{errors.maxWeight}</p>}
+        </div>
 
-      <div>
-        <label htmlFor="image">Image: </label>
-        <input onChange={handleChange} value = {form.image} type='text' name= "image"></input>
-        {errors.image && <p className={style.errors} >{errors.image}</p>}
-      </div>
+        <div className={style.inputs}>
+        <label className={style.label} htmlFor="minWeight">MinWeight: </label>
+          <input className={style.input} onChange={handleChange} value = {form.minWeight} type='text' name= "minWeight"></input>
+          {errors.minWeight && <p className={style.errors} >{errors.minWeight}</p>}
+        </div>
 
-      <button type="submit">CREATE</button>
-    </form>
+        <div className={style.inputs}>
+          <label className={style.label} htmlFor="lifeSpan">LifeSpan: </label>
+          <input className={style.input} onChange={handleChange} value = {form.lifeSpan} type='text' name= "lifeSpan"></input>
+          {errors.lifeSpan && <p className={style.errors} >{errors.lifeSpan}</p>}
+        </div>
+
+        <div className={style.inputs}>
+          <label className={style.label} htmlFor='temperament'>Temperaments: </label>
+          <select className={style.input} onChange={handlerSelect} name='temperament'>
+            {temperaments.map((temp)=> (
+              <option value={temp.id} name={temp.name}>{temp.name}</option>
+            ))}
+          </select>
+          <ul><li className={style.input_li}>{form.temperament.map(item => item + ' , ')}</li></ul>
+          {errors.temperament && <p className={style.errors} >{errors.temperament}</p>}
+        </div>
+        
+
+        <div className={style.inputs}>
+          <label className={style.label} htmlFor="image">Image: </label>
+          <input className={style.input} onChange={handleChange} value = {form.image} type='text' name= "image"></input>
+          {errors.image && <p className={style.errors} >{errors.image}</p>}
+        </div>
+
+        <div className={style.button_div}>
+        <button className={style.button} type="submit">CREATE</button>
+        </div>
+        
+      </form>
+    </div>
+    
   </div>
     
   )

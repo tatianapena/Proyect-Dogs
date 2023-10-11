@@ -1,7 +1,15 @@
-
-
-/* .home {
+.home {
+  background: rgb(23,35,26);
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+
